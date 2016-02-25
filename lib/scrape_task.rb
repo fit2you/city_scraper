@@ -9,7 +9,7 @@ class ScrapeTask
   ROOT = File.expand_path("../..", File.join(File.dirname(__FILE__)))  
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
-  def intialize
+  def initialize
     istat = CsvParser.new('codici_istat_2016.csv')
     @h = IstatHeader.hash(istat.headers)
     @v = istat.values
@@ -36,7 +36,7 @@ class ScrapeTask
   def scrape_routine(index_range)
     index_range.each do |i|
       begin
-        r = City.new(v[i], h)
+        r = City.new(@v[i], @h)
         s = Scraper.new(r)
         cap = s.get_cap
         @values << [r.name, r.region, r.province, r.plate, r.cf, cap]
