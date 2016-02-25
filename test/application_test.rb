@@ -1,19 +1,20 @@
 require 'test/unit'
-require_relative '../lib/csv_parser'
-require_relative '../lib/header'
 require 'byebug'
+require_relative '../lib/csv_parser'
+require_relative '../lib/istat_header'
+require_relative '../lib/city'
 
 class CsvParserTest < Test::Unit::TestCase
 
   def setup
     @istat = CsvParser.new('codici_istat_2016.csv')
-    @h = Header.new(@istat.headers)
-    @h.istat_index
-
+    @h = IstatHeader.hash(@istat.headers)
+    @v = @istat.values
   end
 
-  def test_headers
-    a = [@h.name_idx, @h.region_idx, @h.metropolis_idx, @h.province_idx, @h.plate_idx, @h.cf_idx]
-    puts a
+  def test_city
+    city = City.new(@v[0], @h)
+    val = [city.name, city.region, city.province, city.plate, city.cf]
+    puts val
   end
 end
