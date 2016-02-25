@@ -1,7 +1,7 @@
-require_relative '../csv_parser'
-require_relative '../istat_header'
-require_relative '../city'
-require_relative '../scraper'
+require_relative 'csv_parser'
+require_relative 'istat_header'
+require_relative 'city'
+require_relative 'scraper'
 require 'byebug'
 
 class ScrapeTask
