@@ -1,7 +1,5 @@
 Agliè TO 10011
 Airasca TO 10060
-Agliè TO 10011
-Airasca TO 10060
 Ala di Stura TO 10070
 Albiano d'Ivrea TO 10010
 Alice Superiore TO 10010
