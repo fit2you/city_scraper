@@ -29,7 +29,7 @@ class ScrapeTask
       scrape_routine(@range)
     end
 
-    compile_text
+    export
  
   end
 
