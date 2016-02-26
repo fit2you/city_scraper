@@ -1,7 +1,13 @@
-require_relative 'lib/scrape_task'
+require 'fileutils'
+require 'logger'
+require_relative 'lib/multi_io'
+require_relative 'lib/tasks/scrape_task'
 
 desc "create txt file"
 task :execute do
-  action = ScrapeTask.new
+  FileUtils::mkdir_p 'log'
+  log_file = File.open('log/city_scraper.log', "a")
+  logger = Logger.new(MultiIO.new(STDOUT, log_file))
+  action = ScrapeTask.new(logger)
   action.run
 end

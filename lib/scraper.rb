@@ -24,7 +24,7 @@ class Scraper
   end
 
   def create_url
-    region = URI.escape(@r.region.downcase)
+    region = URI.escape(@r.region.gsub(" ", "-").downcase)
     plate = URI.escape(@r.plate.downcase)
     name = URI.escape(@r.name.downcase)
     BASE_URL + [region, plate, name].join('/') + '.html'

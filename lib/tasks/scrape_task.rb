@@ -1,7 +1,7 @@
-require_relative 'csv_parser'
-require_relative 'istat_header'
-require_relative 'city'
-require_relative 'scraper'
+require_relative '../csv_parser'
+require_relative '../istat_header'
+require_relative '../city'
+require_relative '../scraper'
 require 'byebug'
 
 class ScrapeTask
@@ -9,7 +9,7 @@ class ScrapeTask
   ROOT = File.expand_path("..", File.join(File.dirname(__FILE__)))  
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
-  def initialize
+  def initialize logger
     istat = CsvParser.new('codici_istat_2016.csv')
     @h = IstatHeader.hash(istat.headers)
     @v = istat.values
@@ -17,6 +17,7 @@ class ScrapeTask
     @range = (0..n)
     @values = []
     @errors = []
+    @logger = logger
   end
 
   def run
@@ -40,9 +41,9 @@ class ScrapeTask
         s = Scraper.new(r)
         cap = s.get_cap
         @values << [r.name, r.region, r.province, r.plate, r.cf, cap]
-        puts "#{r.name} #{r.plate} #{cap}"
+        @logger.write("OK\t#{r.name}\t#{r.plate}\t#{cap}\n")
       rescue Exception
-        puts "#{r.name} #{r.plate} gave a problem"
+        @logger.write("ERROR\t#{r.name}\t#{r.plate}\tfailed\n")
         @errors << i
       end
       sleep(4)
@@ -58,9 +59,12 @@ class ScrapeTask
   end
 
   def export
-    f = File.open(File.join(ROOT, 'data', 'output.txt'), "w")
+    f = File.open(File.join(ROOT, 'data', export_filename ), "w")
     f.write( compile_text )
     f.close
   end
 
+  def export_filename
+    sprintf("%s_%s.txt", "cities_list", Time.now.to_i)
+  end
 end
