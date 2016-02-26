@@ -2,11 +2,12 @@ require_relative '../csv_parser'
 require_relative '../istat_header'
 require_relative '../city'
 require_relative '../scraper'
-require 'byebug'
+require 'fileutils'
+
 
 class ScrapeTask
 
-  ROOT = File.expand_path("..", File.join(File.dirname(__FILE__)))  
+  ROOT = File.expand_path("../..", File.join(File.dirname(__FILE__)))  
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
   def initialize logger
@@ -41,9 +42,9 @@ class ScrapeTask
         s = Scraper.new(r)
         cap = s.get_cap
         @values << [r.name, r.region, r.province, r.plate, r.cf, cap]
-        @logger.info("OK\t#{r.name}\t#{r.plate}\t#{cap}\n")
+        @logger.info("OK\t#{r.name}\t#{r.plate}\t#{cap}")
       rescue Exception
-        @logger.info("ERROR\t#{r.name}\t#{r.plate}\tfailed\n")
+        @logger.info("ERROR\t#{r.name}\t#{r.plate}\tfailed")
         @errors << i
       end
       sleep(4)
@@ -59,9 +60,11 @@ class ScrapeTask
   end
 
   def export
-    f = File.open(File.join(ROOT, 'data', export_filename ), "w")
+    filename = File.join(ROOT, 'data', export_filename )
+    f = File.new(filename, "w")
     f.write( compile_text )
     f.close
+ 
   end
 
   def export_filename

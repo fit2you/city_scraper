@@ -1,0 +1,1 @@
+name;region;province;plate;cf;cap\nAgliè;Piemonte;Torino;TO;A074;10011\nAirasca;Piemonte;Torino;TO;A109;10060\nAla di Stura;Piemonte;Torino;TO;A117;10070\nAlbiano d'Ivrea;Piemonte;Torino;TO;A157;10010\nAlice Superiore;Piemonte;Torino;TO;A199;10010\nAlmese;Piemonte;Torino;TO;A218;10040\n
