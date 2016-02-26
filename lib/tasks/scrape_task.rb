@@ -41,9 +41,9 @@ class ScrapeTask
         s = Scraper.new(r)
         cap = s.get_cap
         @values << [r.name, r.region, r.province, r.plate, r.cf, cap]
-        @logger.write("OK\t#{r.name}\t#{r.plate}\t#{cap}\n")
+        @logger.info("OK\t#{r.name}\t#{r.plate}\t#{cap}\n")
       rescue Exception
-        @logger.write("ERROR\t#{r.name}\t#{r.plate}\tfailed\n")
+        @logger.info("ERROR\t#{r.name}\t#{r.plate}\tfailed\n")
         @errors << i
       end
       sleep(4)
