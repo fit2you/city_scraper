@@ -1,20 +1,12 @@
 class AeCity
 
-  attr_reader :name, :region, :province, :plate, :cf
+  attr_reader :name, :province, :plate, :cadastral_code
 
-  def initialize (row, headers)
-    @row = row
-    @name = value_for(headers[:name_idx])
-    @region = value_for(headers[:region_idx])
-    m = value_for(headers[:metropolis_idx]).gsub('-','')
-    p = value_for(headers[:province_idx]).gsub('-','')
-    @province = m + p
-    @plate = value_for(headers[:plate_idx])
-    @cf = value_for(headers[:cf_idx])
-  end
-
-  def value_for(index)
-    @row[index]
+  def initialize (name, cadastral_code, plate, province)
+   @name = name
+   @cadastral_code = cadastral_code
+   @plate = plate
+   @province = province
   end
 
 end
