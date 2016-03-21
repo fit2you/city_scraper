@@ -1,4 +1,4 @@
-require_relative 'csv_parser'
+require_relative 'istat_csv_parser'
 require_relative 'istat_header'
 require_relative 'city'
 
@@ -20,7 +20,7 @@ class ParseFromLog
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
   def initialize
-    istat = CsvParser.new('codici_istat_2016.csv')
+    istat = IstatCsvParser.new('codici_istat_2016.csv')
     @h = IstatHeader.hash(istat.headers)
     @v = istat.values
     @c = CapLog.new('log.txt').list

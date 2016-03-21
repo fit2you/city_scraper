@@ -1,5 +1,3 @@
-require 'byebug'
-
 class City
 
   attr_reader :name, :region, :province, :plate, :cf

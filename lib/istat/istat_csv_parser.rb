@@ -1,6 +1,6 @@
-class CsvParser
+class IstatCsvParser
 
-  ROOT = File.expand_path("..", File.join(File.dirname(__FILE__)))
+  ROOT = File.expand_path("../..", File.join(File.dirname(__FILE__)))
 
   def initialize file_name
    file =  File.open(File.join(ROOT, 'data', file_name)).read

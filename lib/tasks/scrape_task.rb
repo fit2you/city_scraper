@@ -1,7 +1,7 @@
-require_relative '../csv_parser'
-require_relative '../istat_header'
-require_relative '../city'
-require_relative '../scraper'
+require_relative '../istat/istat_csv_parser'
+require_relative '../istat/istat_header'
+require_relative '../istat/city'
+require_relative '../istat/scraper'
 require 'fileutils'
 
 
@@ -11,7 +11,7 @@ class ScrapeTask
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
   def initialize logger
-    istat = CsvParser.new('codici_istat_2016.csv')
+    istat = IstatCsvParser.new('codici_istat_2016.csv')
     @h = IstatHeader.hash(istat.headers)
     @v = istat.values
     n = @v.size - 1
