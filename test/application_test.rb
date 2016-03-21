@@ -1,13 +1,14 @@
 require 'test/unit'
 require 'byebug'
-require_relative '../lib/csv_parser'
-require_relative '../lib/istat_header'
-require_relative '../lib/city'
 
-class CsvParserTest < Test::Unit::TestCase
+require_relative '../lib/istat/istat_csv_parser'
+require_relative '../lib/istat/istat_header'
+require_relative '../lib/istat/city'
+
+class IstatCsvParserTest < Test::Unit::TestCase
 
   def setup
-    @istat = CsvParser.new('codici_istat_2016.csv')
+    @istat = IstatCsvParser.new('codici_istat_2016.csv')
     @h = IstatHeader.hash(@istat.headers)
     @v = @istat.values
   end

@@ -1,9 +1,9 @@
 require 'ostruct'
 require 'test/unit'
-require_relative '../lib/scraper'
+require_relative '../lib/istat/scraper'
 
 
-class CsvParserTest < Test::Unit::TestCase
+class IstatCsvParserTest < Test::Unit::TestCase
 
   def setup
     @r = OpenStruct.new(name: "Trieste", plate: "TS", region: "Friuli-Venezia Giulia")
