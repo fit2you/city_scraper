@@ -10,14 +10,15 @@ class AeScraper
   HOME_URL = 'https://telematici.agenziaentrate.gov.it/VerificaCF/Scegli.do?parameter=verificaCfPf'
   USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
   BASE_URL = 'https://telematici.agenziaentrate.gov.it/VerificaCF/AjaxOptionListComuni.do?prov='
-  
+
   class << self 
+
     def execute
       cities = []
       province_list.each do |prov, name|
         cities << cities_list(prov, name)
       end
-
+      cities
     end
 
     def province_list
@@ -37,13 +38,13 @@ class AeScraper
     def cities_list prov, prov_name
       result = []
       url = BASE_URL + prov
-      cities = open(HOME_URL, "User-Agent" => USER_AGENT ){|f| f.read}
+      cities = open(url, "User-Agent" => USER_AGENT ){|f| f.read}
       doc = Nokogiri::XML(cities)
       doc.css('comuneImpl').each do |comune|
         result << AeCity.new(comune.css(name="dizione").text, comune.css(name="codCat").text, prov, prov_name)
       end
+      result
     end
-
 
   end
 end
