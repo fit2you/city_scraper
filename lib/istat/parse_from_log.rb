@@ -20,7 +20,7 @@ class ParseFromLog
   HEADERS = ["name", "region", "province", "plate", "cf", "cap"]
   
   def initialize
-    istat = IstatCsvParser.new('codici_istat_2016.csv')
+    istat = IstatCsvParser.new('codici_istat_2017.csv')
     @h = IstatHeader.hash(istat.headers)
     @v = istat.values
     @c = CapLog.new('log.txt').list

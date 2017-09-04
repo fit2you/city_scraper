@@ -8,7 +8,7 @@ require_relative '../lib/istat/city'
 class IstatCsvParserTest < Test::Unit::TestCase
 
   def setup
-    @istat = IstatCsvParser.new('codici_istat_2016.csv')
+    @istat = IstatCsvParser.new('codici_istat_2017.csv')
     @h = IstatHeader.hash(@istat.headers)
     @v = @istat.values
   end
