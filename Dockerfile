@@ -1,4 +1,4 @@
-FROM ruby:2.5-slim-stretch
+FROM ruby:2.7-slim-bullseye
 
 # Common dependencies
 RUN apt-get update -qq \
@@ -7,6 +7,7 @@ RUN apt-get update -qq \
   curl \
   git \
   gnupg2 \
+  ssh \
   && apt-get clean \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
