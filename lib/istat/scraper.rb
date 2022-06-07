@@ -19,15 +19,15 @@ class Scraper
 
   def get_page_content
     url = create_url
-    source = open(url, "User-Agent" => USER_AGENT ){|f| f.read}
+    source = URI.open(url, "User-Agent" => USER_AGENT ){|f| f.read}
   end
 
   def create_url
-    region = URI.escape(@r.region.gsub(" ", "-").downcase)
-    plate = URI.escape(@r.plate.downcase)
-    name = URI.escape(@r.name.downcase)
-    puts BASE_URL + [region, plate, name].join('/') + '.htm'
-    BASE_URL + [region, plate, name].join('/') + '.htm'
+    URI::Parser.new.escape(
+      BASE_URL + [@r.region.gsub(" ", "-").downcase,
+      @r.plate.downcase,
+      @r.name.downcase].join('/') + '.htm'
+    )
   end
 
 
