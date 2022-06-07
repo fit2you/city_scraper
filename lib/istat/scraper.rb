@@ -5,7 +5,7 @@ require 'ostruct'
 
 class Scraper
 
-  BASE_URL = 'http://www.paginebianche.it/cap/'
+  BASE_URL = 'https://www.paginebianche.it/cap/'
   USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'
   
   def initialize r
@@ -14,7 +14,7 @@ class Scraper
 
   def get_cap
     doc = Nokogiri::HTML(get_page_content)
-    doc.css("span[class='result-cont-li li-cap']").text
+    doc.css("span[class='result-cap']").text
   end
 
   def get_page_content
@@ -26,7 +26,8 @@ class Scraper
     region = URI.escape(@r.region.gsub(" ", "-").downcase)
     plate = URI.escape(@r.plate.downcase)
     name = URI.escape(@r.name.downcase)
-    BASE_URL + [region, plate, name].join('/') + '.html'
+    puts BASE_URL + [region, plate, name].join('/') + '.htm'
+    BASE_URL + [region, plate, name].join('/') + '.htm'
   end
 
 
